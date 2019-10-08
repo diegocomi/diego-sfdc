@@ -1,0 +1,10 @@
+<design:component >
+
+    <design:attribute name="rate" label="Annual Interest Rate" description="Write down the APR the component will use to calculate your quotes" required="true" min="1" max="100">
+    </design:attribute>
+
+    <!-- uncomment to adapt for longer loans-->
+    <!-- <design:attribute name="numMonths" label="Duration of Loan in Months" description="Select the number of months for this loan" default="12" required="false">
+    </design:attribute> -->
+
+</design:component>
