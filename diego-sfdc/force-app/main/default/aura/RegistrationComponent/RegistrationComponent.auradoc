@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Description for my App</aura:description>
+	<aura:example name="ExampleName" ref="c.RegistrationComponent" label="This lovely label for registration component">
+		Example Description
+	</aura:example>
+</aura:documentation>

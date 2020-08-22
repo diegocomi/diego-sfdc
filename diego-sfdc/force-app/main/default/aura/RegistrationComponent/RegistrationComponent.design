@@ -1,0 +1,6 @@
+<design:component >
+
+    <design:attribute name="pageHeading" label="Page Heading Label" description="Set the component title">
+    </design:attribute>
+
+</design:component>
