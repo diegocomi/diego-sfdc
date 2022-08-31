@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Play with Drag & Drop">
+        <div class="slds-p-around_small">
+            <div class="slds-text-heading_small">Inactive Accounts</div>
+            <div class="flex-container">
+                <template for:each={inactive} for:item="inactiveAccount">
+                    <div id={inactiveAccount.accountId} key={inactiveAccount.accountId} class="box inactive" draggable="true" ondragstart={handleDrag}>
+                        <lightning-tile label={inactiveAccount.accountName} type="media" class="slds-p-around_small">
+                            <lightning-icon slot="media" icon-name="standard:account"></lightning-icon>
+                            <p class="slds-truncate" title={inactiveAccount.accountStatus}>{inactiveAccount.accountStatus}</p>
+                        </lightning-tile>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-text-heading_small">Active Accounts</div>
+            <div class="flex-container">
+                //li of accounts
+            </div>
+            <div class="slds-text-heading_small">Suspended Accounts</div>
+            <div class="flex-container">
+                //li accounts
+            </div>
+        </div>
+        
+    </lightning-card>
+</template>
