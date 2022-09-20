@@ -15,6 +15,8 @@ public with sharing class DragAndDropController {
 
     @AuraEnabled
     public static void updateAccountStatus(AccountStatusWrapper accountData){
+        System.debug(accountData.accountId);
+        System.debug(accountData.accountStatus);
         Account account = new Account(
             Id = accountData.accountId,
             Status__c = accountData.accountStatus
@@ -28,14 +30,16 @@ public with sharing class DragAndDropController {
     }
 
     public class AccountStatusWrapper {
-        @AuraEnabled public Id accountId;
-        @AuraEnabled public String accountStatus;
-        @AuraEnabled public String accountName;
+        @AuraEnabled public Id accountId {get;set;}
+        @AuraEnabled public String accountStatus {get;set;}
+        @AuraEnabled public String accountName {get;set;}
 
         public AccountStatusWrapper(Account account){
             this.accountId = account.Id;
             this.accountStatus = account.Status__c;
             this.accountName = account.Name;
         }
+
+        public AccountStatusWrapper(){}
     }
 }
