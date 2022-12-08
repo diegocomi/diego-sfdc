@@ -51,7 +51,7 @@ jobs:
           then
             echo "-- found deployment package. Starting deployment --"
             cat ./package/package.xml
-            sfdx force:source:deploy --username ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --wait -1 --verbose
+            sfdx force:source:deploy --username ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --wait 30 --verbose
           else
             echo "-- No deployment package found --"
           fi
