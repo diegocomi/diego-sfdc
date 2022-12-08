@@ -20,7 +20,7 @@ jobs:
         run: npm install sfdx-cli -g
       
       - name: "Install SFDX Git Delta"
-        run: echo y | sfdx:plugins:install sfdx-git-delta
+        run: echo y | sfdx plugins:install sfdx-git-delta
 
       - name: "Checkout source code"
         uses: actions/checkout@v3
