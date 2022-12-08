@@ -1,5 +1,11 @@
 public with sharing class EmptyClass {
+    private String testString;
+
     public EmptyClass() {
-        //should all work now!!
+        this.testString = 'Diego';
+    }
+
+    public String getTestString(){
+        return this.testString;
     }
 }

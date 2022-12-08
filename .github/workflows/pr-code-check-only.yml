@@ -1,0 +1,52 @@
+name: Run Check-Only Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  job-validate-prod-deployment:
+    name:  "Validate Deployment"
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: "Install SFDX CLI"
+        run: npm install sfdx-cli -g
+      
+      - name: "Install SFDX Git Delta"
+        run: echo y | sfdx plugins:install sfdx-git-delta
+
+      - name: "Checkout source code"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: "Populate Server Key"
+        run: echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
+      
+      - name: "Authorise into Salesforce"
+        run: sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --setdefaultdevhubusername
+        
+      - name: "Write Deployment Package"
+        run: sfdx sgd:source:delta --from "origin/${{ github.base_ref }}" --to "origin/${{ github.head_ref }}" --output . --source force-app/main/default
+
+      - name: "Upload package.xml to artifacts"
+        uses: actions/upload-artifact@v3
+        with:
+          name: "Deployment Package"
+          path: package/package.xml
+      
+      - name: "CheckOnly Test Run"
+        shell: bash
+        run: |
+          if grep -q '<types>' package/package.xml;
+          then
+            cat ./package/package.xml
+            sfdx force:source:deploy -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --verbose --wait 180 --checkonly
+          fi
