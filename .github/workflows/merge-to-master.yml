@@ -27,8 +27,9 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: "Store server key"
+      - name: "Populate auth file with "
         run: | 
+          touch server.key
           echo  ${{ secrets.SALESFORCE_JWT_SECRET_KEY }} > ./server.key
 
       - name: "Authorise into Salesforce PROD"
