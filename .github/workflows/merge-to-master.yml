@@ -22,7 +22,6 @@ jobs:
       - name: "Install SFDX Git Delta"
         run: 
           echo y | sfdx plugins:install sfdx-git-delta
-          sfdx plugins
 
       - name: "Checkout source code with all history"
         uses: actions/checkout@v3
