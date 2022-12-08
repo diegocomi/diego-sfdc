@@ -41,17 +41,17 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: "Deployment Package"
-          path: autoPackage/package.xml
+          path: package/package.xml
 
       - name: "Deploy"
         shell: bash
         run: |
           echo "-- Starting Deployment --"
-          if grep -q '<types>' autoPackage/package.xml;
+          if grep -q '<types>' package/package.xml;
           then
             echo "-- found deployment package. Starting deployment --"
-            cat ./autoPackage/package.xml
-            sfdx force:source:deploy --username ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x autoPackage/package.xml --testlevel RunLocalTests --wait -1 --verbose
+            cat ./package/package.xml
+            sfdx force:source:deploy --username ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --wait -1 --verbose
           else
             echo "-- No deployment package found --"
           fi
