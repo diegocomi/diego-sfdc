@@ -3,7 +3,7 @@ name: Merge To Master SFDX Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: read
