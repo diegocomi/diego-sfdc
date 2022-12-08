@@ -45,8 +45,8 @@ jobs:
       - name: "CheckOnly Test Run"
         shell: bash
         run: |
-        if grep -q '<types>' package/package.xml;
-        then
-          cat ./package/package.xml
-          sfdx force:source:deploy -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --verbose --wait 180 --checkonly
-        fi
+          if grep -q '<types>' package/package.xml;
+          then
+            cat ./package/package.xml
+            sfdx force:source:deploy -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --verbose --wait 180 --checkonly
+          fi
