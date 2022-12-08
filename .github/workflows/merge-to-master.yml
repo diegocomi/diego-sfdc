@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
       
       - name: "Populate auth file with SALESFORCE_JWT_SECRET_KEY secret"
-        run: echo ${{ secrets.SALESFORCE_JWT_SECRET_KEY }} > ./server.key
+        run: echo ${{ secrets.SALESFORCE_JWT_SECRET_KEY }} > server.key
 
       - name: "Authorise into Salesforce PROD"
         run: sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --setdefaultdevhubusername
