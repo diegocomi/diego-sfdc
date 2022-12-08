@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  job-production-deployment:
+  deploy-to-diego:
     name: "Deploy to Diego Org"
     runs-on: ubuntu-latest
     steps:
