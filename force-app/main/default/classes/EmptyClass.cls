@@ -1,4 +1,5 @@
 public with sharing class EmptyClass {
     public EmptyClass() {
-        //another 
+        //another thing coming
+    }
 }
