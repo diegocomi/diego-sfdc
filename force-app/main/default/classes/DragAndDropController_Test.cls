@@ -29,4 +29,27 @@ private without sharing class DragAndDropController_Test {
         Account result = [SELECT Status__c FROM Account WHERE Id = :account.Id];
         Assert.areEqual('Active', result.Status__c);
     }
+
+    @isTest
+    private static void updateAccountWithNewStatus_NegativePath(){
+        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive');
+        insert account;
+        DragAndDropController.AccountStatusWrapper dataWrapper = new DragAndDropController.AccountStatusWrapper();
+        dataWrapper.accountId = account.Id;
+        dataWrapper.accountName = account.Name;
+        dataWrapper.accountStatus = 'Some non-allowed status';
+
+        String resultErrorMessage;
+
+        Test.startTest();
+        try{
+            DragAndDropController.updateAccountStatus(dataWrapper);
+        } catch (Exception e) {
+            resultErrorMessage = e.getMessage();
+        }
+        Test.stopTest();
+
+        Assert.isNotNull(resultErrorMessage);
+
+    }
 }
