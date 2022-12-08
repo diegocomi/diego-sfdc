@@ -22,15 +22,15 @@ jobs:
       - name: "Install SFDX Git Delta"
         run: npm install sfdx-git-delta@latest -g
 
-      - name: "Checkout source code history"
+      - name: "Checkout source code with all history"
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       
-      - name: "Populate auth file with "
+      - name: "Populate auth file with key"
         run: | 
           touch server.key
-          echo  ${{ secrets.SALESFORCE_JWT_SECRET_KEY }} > ./server.key
+          echo  ${{ secrets.SALESFORCE_JWT_SECRET_KEY }} > server.key
 
       - name: "Authorise into Salesforce PROD"
         run: sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --setdefaultdevhubusername
