@@ -1,5 +1,8 @@
-public with sharing class ProfileCache_Test {
-    public ProfileCache_Test() {
+@isTest
+private class ProfileCache_Test {
+    
+    @isTest
+    private static void retrieveProfileCache() {
         Profile p;
         
         Test.startTest();
