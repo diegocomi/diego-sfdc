@@ -3,12 +3,15 @@ private class ProfileCache_Test {
     
     @isTest
     private static void retrieveProfileCache() {
-        Profile p;
+        Id retrievedProfileId;
         
         Test.startTest();
-        p = (Profile) Cache.Org.get(ProfileCache.class, 'System Administrator');
+        Map<String,Profile> mapProfileByName = (Map<String,Profile>)Cache.Org.get(ProfileCache.class, 'mapProfileByName');
+        retrievedProfileId = mapProfileByName.get('System Administrator').Id;
         Test.stopTest();
 
-        Assert.AreEqual('System Administrator', p.Name, 'Error retrieving profile from cacher class');
+        Id systemAdminProfileId = [SELECT Id FROM Profile WHERE Name = 'System Administrator'].Id;
+
+        Assert.AreEqual(systemAdminProfileId, retrievedProfileId, 'Error retrieving profile from cacher class');
     }
 }
