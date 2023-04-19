@@ -1,0 +1,27 @@
+<template>
+  <lightning-card title="New Modal Methods">
+    <lightning-layout horizontal-align="space">
+      <lightning-layout-item padding="around-small">
+        <lightning-button
+          onclick={handleAlertClick}
+          label="Trigger Alert"
+        ></lightning-button>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small">
+        <lightning-button
+          onclick={handleConfirmClick}
+          label="Open Confirmation Modal"
+        ></lightning-button>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small">
+        <lightning-button
+          onclick={handlePromptClick}
+          label="Open Prompt Modal"
+        ></lightning-button>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small">
+        <lightning-button label="Open Modal" onclick={handleOpenModal}></lightning-button>
+      </lightning-layout-item>
+    </lightning-layout>
+  </lightning-card>
+</template>
