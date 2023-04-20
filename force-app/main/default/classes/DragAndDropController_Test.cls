@@ -2,7 +2,7 @@
 private without sharing class DragAndDropController_Test {
     @isTest
     private static void retrieveAccountWithStatusTest(){
-        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive');
+        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive', Website = 'something.uk');
         insert account;
 
         DragAndDropController.AccountStatusWrapper[] data;
@@ -17,7 +17,7 @@ private without sharing class DragAndDropController_Test {
 
     @isTest
     private static void updateAccountWithNewStatusTest(){
-        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive');
+        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive', Website = 'something.uk');
         insert account;
         
         DragAndDropController.AccountStatusWrapper dataWrapper = new DragAndDropController.AccountStatusWrapper(account);
@@ -32,7 +32,7 @@ private without sharing class DragAndDropController_Test {
 
     @isTest
     private static void updateAccountWithNewStatus_NegativePath(){
-        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive');
+        Account account = new Account(Name = 'Diego Test Account', Status__c = 'Inactive', Website = 'something.uk');
         insert account;
         DragAndDropController.AccountStatusWrapper dataWrapper = new DragAndDropController.AccountStatusWrapper();
         dataWrapper.accountId = account.Id;
