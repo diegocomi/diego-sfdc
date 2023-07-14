@@ -48,5 +48,5 @@ jobs:
           if grep -q '<types>' package/package.xml;
           then
             cat ./package/package.xml
-            sfdx project deploy start --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --checkonly
+            sfdx project deploy start --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --dry-run
           fi
