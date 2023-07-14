@@ -9,6 +9,7 @@ public without sharing class AccountLookupFieldPiclistEditor extends VisualEdito
         VisualEditor.DataRow defaultValue = new VisualEditor.DataRow('', '');
         return defaultValue;
     }
+    //comment
 
     public override VisualEditor.DynamicPicklistRows getValues() {
         VisualEditor.DynamicPicklistRows rows = new VisualEditor.DynamicPicklistRows();

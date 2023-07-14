@@ -12,6 +12,7 @@ private class AccountLookupFieldPiclistEditorTest {
         AccountLookupFieldPiclistEditor picklistEditor = new AccountLookupFieldPiclistEditor(context);
         resultPicklist = picklistEditor.getValues();
         Test.stopTest();
+        //comment
 
         
 
