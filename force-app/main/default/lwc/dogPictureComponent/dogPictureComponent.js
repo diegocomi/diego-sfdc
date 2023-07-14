@@ -1,58 +1,51 @@
-import { LightningElement } from "lwc";
+import { LightningElement, wire } from "lwc";
+import Id from "@salesforce/user/Id";
+import Username_Field from "@salesforce/schema/User.Username";
+import { getRecord } from 'lightning/uiRecordApi';
 import BorderColliePicture from "@salesforce/resourceUrl/Dog_Picture";
-import DachsundPicture from "@salesforce/resourceUrl/dachspicture";
-import splitsdk from "@salesforce/resourceUrl/splitsdk";
-import { loadScript } from "lightning/platformResourceLoader";
-import Id from '@salesforce/user/Id';
-
-
+import publishDogLike from "@salesforce/apex/DogLikePublisher.publishDogLikeEvent";
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class DogPictureComponent extends LightningElement {
-  treatment;
-  userId = Id;
-  splitIoClient;
-  
-  get dogPictureURL() {
-    if(this.treatment === 'Einstein') {
-      return BorderColliePicture;
-    } else if (this.treatment === 'Yext') {
-      return DachsundPicture;
-    } else {
-      return DachsundPicture;
+  currentUsername;
+  error;
+
+  @wire(getRecord, {recordId: Id, fields : [Username_Field]})
+  currentUserInfo({error, data}){
+    if(data) {
+      this.currentUsername = data.fields.Username.value;
+    } else if (error) {
+      this.error = error;
     }
   }
 
-  get treatment_loaded () {
-    return !!this.treatment;
+  get dogPictureURL() {
+      return BorderColliePicture;
   }
 
-  renderedCallback() {
-    loadScript(this, splitsdk).then(() => {
-      const factory = splitio({
-        core: {
-          authorizationKey: 'tv7jnj9t3da4vs6ebvug8cppde19v4vk0004',
-          key: this.userId,
-          trafficType: 'user'
-        },
-        startup: {
-          readyTimeout: 1.5,
-        }
-      });
+  handleDogLike() {
+    let dogPictureWrapper = {
+      dogPicture : this.dogPictureURL,
+      username : this.currentUsername
+    };
 
-      this.splitIoClient = factory.client();
-
-      this.splitIoClient.on(this.splitIoClient.Event.SDK_READY, () => {
-        let treatment = this.splitIoClient.getTreatment("AB_SF_CHATBOT");
-        console.log('treament = ' + treatment);
-        this.treatment = treatment;
-      });
-    });
+    publishDogLike({wrapper: dogPictureWrapper})
+      .then(() => {
+        const successToast = new ShowToastEvent({
+          title: 'Thank you!',
+          message: 'Thank you for your like!',
+          variant: 'success'
+        });
+        this.dispatchEvent(successToast);
+      })
+      .catch((error) => {
+        const errorToast = new ShowToastEvent({
+          title: 'Error',
+          message: error.body.message,
+          variant: 'error'
+        });
+        this.dispatchEvent(errorToast);
+      })
   }
-
-  disconnectedCallback() {
-    this.splitIoClient.destroy();
-  }
-
-    
 
 }
