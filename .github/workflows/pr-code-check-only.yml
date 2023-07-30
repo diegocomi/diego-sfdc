@@ -57,4 +57,4 @@ jobs:
         shell: bash
         id: validate-fail-retrieval
         if: failure()
-        run:  echo "failure step completed"  #echo "${{ steps.validate-deployment.outputs }}"
+        run:  echo ${{ steps.validate-deployment.conclusion }}  #echo "${{ steps.validate-deployment.outputs }}"
