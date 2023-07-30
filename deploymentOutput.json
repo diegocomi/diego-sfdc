@@ -1,14 +1,308 @@
 {
-  "code": 1,
-  "context": "DeployMetadataValidate",
-  "commandName": "DeployMetadataValidate",
-  "data": {
-    "deployId": "0Af1n00001iPE3XCAW"
+  "status": 0,
+  "result": {
+    "checkOnly": true,
+    "completedDate": "2023-07-30T21:38:34.000Z",
+    "createdBy": "0050Y000000EBMD",
+    "createdByName": "Diego Cominazzini",
+    "createdDate": "2023-07-30T21:38:27.000Z",
+    "details": {
+      "componentSuccesses": [
+        {
+          "changed": true,
+          "componentType": "",
+          "created": false,
+          "createdDate": "2023-07-30T21:38:30.000Z",
+          "deleted": false,
+          "fileName": "package.xml",
+          "fullName": "package.xml",
+          "success": true
+        },
+        {
+          "changed": true,
+          "componentType": "ApexClass",
+          "created": false,
+          "createdDate": "2023-07-30T21:38:30.000Z",
+          "deleted": false,
+          "fileName": "classes/DogLikePublisher.cls",
+          "fullName": "DogLikePublisher",
+          "id": "01p1n00000Pp2WZAAZ",
+          "success": true
+        }
+      ],
+      "runTestResult": {
+        "codeCoverage": [
+          {
+            "id": "01p1n00000PJEczAAH",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 2,
+                "numExecutions": 0,
+                "time": -1
+              },
+              {
+                "column": 0,
+                "line": 3,
+                "numExecutions": 0,
+                "time": -1
+              },
+              {
+                "column": 0,
+                "line": 6,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "Contacts_Selector",
+            "namespace": null,
+            "numLocations": 3,
+            "numLocationsNotCovered": 3,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01p1n00000Pbp89AAB",
+            "name": "EmptyClass",
+            "namespace": null,
+            "numLocations": 4,
+            "numLocationsNotCovered": 0,
+            "type": "Class",
+            "dmlInfo": [],
+            "locationsNotCovered": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01p1n00000PbpEqAAJ",
+            "name": "ProfileCache",
+            "namespace": null,
+            "numLocations": 5,
+            "numLocationsNotCovered": 0,
+            "type": "Class",
+            "dmlInfo": [],
+            "locationsNotCovered": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01p1n00000PJEd3AAH",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 3,
+                "numExecutions": 0,
+                "time": -1
+              },
+              {
+                "column": 0,
+                "line": 4,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "PhoneNumberSync_Service",
+            "namespace": null,
+            "numLocations": 18,
+            "numLocationsNotCovered": 2,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01p1n00000PJEd4AAH",
+            "name": "Test_Utils",
+            "namespace": null,
+            "numLocations": 6,
+            "numLocationsNotCovered": 0,
+            "type": "Class",
+            "dmlInfo": [],
+            "locationsNotCovered": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01p1n00000Pp2WZAAZ",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 14,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "DogLikePublisher",
+            "namespace": null,
+            "numLocations": 9,
+            "numLocationsNotCovered": 1,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01p1n00000PzrXrAAJ",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 9,
+                "numExecutions": 0,
+                "time": -1
+              },
+              {
+                "column": 0,
+                "line": 10,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "DragAndDropController",
+            "namespace": null,
+            "numLocations": 24,
+            "numLocationsNotCovered": 2,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          }
+        ],
+        "flowCoverage": [
+          {
+            "elementsNotCovered": [
+              "myrule_1_a1"
+            ],
+            "flowId": "3011n000000FZSx",
+            "flowName": "Contact_address_change",
+            "flowNamespace": null,
+            "numElements": 4,
+            "numElementsNotCovered": 1,
+            "processType": "Workflow"
+          },
+          {
+            "elementsNotCovered": [
+              "add_description"
+            ],
+            "flowId": "3011n000000OTgo",
+            "flowName": "Hamburger_Description_Filler",
+            "flowNamespace": null,
+            "numElements": 1,
+            "numElementsNotCovered": 1,
+            "processType": "AutoLaunchedFlow"
+          }
+        ],
+        "numFailures": 0,
+        "numTestsRun": 9,
+        "successes": [
+          {
+            "id": "01p1n00000PY1LIAA1",
+            "methodName": "shouldPublishDogLike",
+            "name": "DogLikePublisher_Test",
+            "namespace": null,
+            "time": 1035
+          },
+          {
+            "id": "01p1n00000Pbp7zAAB",
+            "methodName": "retrieveAccountWithStatusTest",
+            "name": "DragAndDropController_Test",
+            "namespace": null,
+            "time": 507
+          },
+          {
+            "id": "01p1n00000Pbp7zAAB",
+            "methodName": "updateAccountWithNewStatusTest",
+            "name": "DragAndDropController_Test",
+            "namespace": null,
+            "time": 160
+          },
+          {
+            "id": "01p1n00000Pbp7zAAB",
+            "methodName": "updateAccountWithNewStatus_NegativePath",
+            "name": "DragAndDropController_Test",
+            "namespace": null,
+            "time": 161
+          },
+          {
+            "id": "01p1n00000Pbp8JAAR",
+            "methodName": "emptyClassInitialiserTest",
+            "name": "EmptyClass_Test",
+            "namespace": null,
+            "time": 62
+          },
+          {
+            "id": "01p1n00000PJEd1AAH",
+            "methodName": "GivenAnAccount_WhenPhoneNumberIsNull_ThenContactsNumberAreNotUpdated",
+            "name": "OptimizedAccountHandler_Tests",
+            "namespace": null,
+            "time": 64
+          },
+          {
+            "id": "01p1n00000PJEd1AAH",
+            "methodName": "GivenAnAccount_WhenPhoneNumberIsSpecial_ThenContactsNumberAreNotUpdated",
+            "name": "OptimizedAccountHandler_Tests",
+            "namespace": null,
+            "time": 57
+          },
+          {
+            "id": "01p1n00000PJEd1AAH",
+            "methodName": "GivenAnAccount_WhenPhoneNumberIsUpdated_ThenContactsNumberAreUpdated",
+            "name": "OptimizedAccountHandler_Tests",
+            "namespace": null,
+            "time": 60
+          },
+          {
+            "id": "01p1n00000PbpFAAAZ",
+            "methodName": "retrieveProfileCache",
+            "name": "ProfileCache_Test",
+            "namespace": null,
+            "time": 98
+          }
+        ],
+        "totalTime": 2714,
+        "codeCoverageWarnings": [],
+        "failures": [],
+        "flowCoverageWarnings": []
+      },
+      "componentFailures": []
+    },
+    "done": true,
+    "id": "0Af1n00001iPE91CAG",
+    "ignoreWarnings": false,
+    "lastModifiedDate": "2023-07-30T21:38:34.000Z",
+    "numberComponentErrors": 0,
+    "numberComponentsDeployed": 1,
+    "numberComponentsTotal": 1,
+    "numberTestErrors": 0,
+    "numberTestsCompleted": 9,
+    "numberTestsTotal": 9,
+    "rollbackOnError": true,
+    "runTestsEnabled": true,
+    "startDate": "2023-07-30T21:38:28.000Z",
+    "status": "Succeeded",
+    "success": true,
+    "files": [
+      {
+        "fullName": "DogLikePublisher",
+        "type": "ApexClass",
+        "state": "Changed",
+        "filePath": "/Users/diego.cominazzini/Documents/Workspaces/diego-sfdc/force-app/main/default/classes/DogLikePublisher.cls"
+      },
+      {
+        "fullName": "DogLikePublisher",
+        "type": "ApexClass",
+        "state": "Changed",
+        "filePath": "/Users/diego.cominazzini/Documents/Workspaces/diego-sfdc/force-app/main/default/classes/DogLikePublisher.cls-meta.xml"
+      }
+    ]
   },
-  "message": "Failed to validate the deployment (0Af1n00001iPE3XCAW). Due To:\nAverage test coverage across all Apex Classes and Triggers is 52%, at least 75% test coverage is required.",
-  "name": "FailedValidationError",
-  "status": 1,
-  "stack": "FailedValidationError: Failed to validate the deployment (0Af1n00001iPE3XCAW). Due To:\nAverage test coverage across all Apex Classes and Triggers is 52%, at least 75% test coverage is required.\n    at Messages.createError (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@salesforce/core/lib/messages.js:393:16)\n    at DeployMetadataValidate.run (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@salesforce/plugin-deploy-retrieve/lib/commands/project/deploy/validate.js:77:18)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async DeployMetadataValidate._run (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@oclif/core/lib/command.js:117:22)\n    at async Config.runCommand (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@oclif/core/lib/config/config.js:329:25)\n    at async run (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@oclif/core/lib/main.js:89:16)",
-  "exitCode": 1,
   "warnings": []
 }
