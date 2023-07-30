@@ -65,9 +65,7 @@ jobs:
         id: store-quick-deploy-id
         if: success() && steps.validate-deployment.conclusion == 'success'
         run: |
-          QUICK_DEPLOY_ID=$( jq -r '.id' validateResult.json)
-          VALIDATION_DATE=$( jq '.completedDate' validateResult.json)
-          echo "$QUICK_DEPLOY_ID"
-          echo "$VALIDATION_DATE"
+          echo | jq -r '.id' validateResult.json
+          echo | jq '.completedDate' validateResult.json
           echo ${{ github.event.number }}
           
