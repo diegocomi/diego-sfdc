@@ -58,4 +58,4 @@ jobs:
         shell: bash
         id: validate-fail-retrieval
         if: ${{ failure() && steps.validate-deployment.conclusion == 'failure '}}
-        run: echo "{{$ steps.validate-deployment.outputs }}"
+        run: echo "${{ steps.validate-deployment.outputs }}"
