@@ -14,6 +14,8 @@ jobs:
   job-validate-prod-deployment:
     name:  "Validate Deployment"
     runs-on: ubuntu-latest
+    outputs:
+      validation-result: ${{ steps.validate-deployment.outputs }}
     steps:
 
       - name: "Install SF CLI"
@@ -46,16 +48,14 @@ jobs:
         id: validate-deployment
         shell: bash
         run: |
+          cat ./package/package.xml
           if grep -q '<types>' package/package.xml;
           then
-          ::set-output name=VALIDATION_OUTPUT::$(
-            cat ./package/package.xml
-            sfdx project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json
-            )
+            sfdx project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> "$GITHUB.OUTPUT"
           fi
 
       - name: "Retrieve failed step details"
         shell: bash
         id: validate-fail-retrieval
         if: ${{ failure() && steps.validate-deployment.conclusion == 'failure '}}
-        run: echo "{{$ steps.validate-deployment.outputs.VALIDATION_OUTPUT }}"
+        run: echo "{{$ steps.validate-deployment.outputs }}"
