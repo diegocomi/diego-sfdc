@@ -51,11 +51,10 @@ jobs:
           cat ./package/package.xml
           if grep -q '<types>' package/package.xml;
           then
-            deployResult=$( sf project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json )
-            echo "::set-output name=validate_result::$deployResult"
+            sf project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> validateResult.json
           fi
       - name: "Retrieve failed step details"
         shell: bash
         id: validate-fail-retrieval
         if: failure() && steps.validate-deployment.conclusion == 'failure'
-        run:  echo "${{ steps.validate-deployment.outputs.validate_result }}"
+        run: jq 'data.deployId' validateResult.json
