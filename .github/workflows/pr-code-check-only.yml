@@ -60,4 +60,14 @@ jobs:
         run: |
           DEPLOY_ID=$( jq -r '.data.deployId' validateResult.json )
           sf project deploy report --job-id "$DEPLOY_ID" --coverage-formatters text
+      - name: "Stored successful deployment Id"
+        shell: bash
+        id: store-quick-deploy-id
+        if: success() && steps.validate-deployment.conclusion == 'success'
+        run: |
+          QUICK_DEPLOY_ID=$( jq -r '.id' validateResult.json)
+          VALIDATION_DATE=$( jq '.completedDate' validationResult.json)
+          echo "$QUICK_DEPLOY_ID"
+          echo "$VALIDATION_DATE"
+          echo ${{ github.event.number }}
           

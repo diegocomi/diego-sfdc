@@ -8,7 +8,8 @@ public with sharing class DogLikePublisher {
         Database.SaveResult publishResult = EventBus.publish(dogClickEvent);
         
         if(publishResult.isSuccess()){
-            return 'success';
+            String success = 'success';
+            return success;
         } else {
             throw new AuraHandledException('exception text!');
         }
