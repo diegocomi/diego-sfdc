@@ -1,0 +1,14 @@
+{
+  "code": 1,
+  "context": "DeployMetadataValidate",
+  "commandName": "DeployMetadataValidate",
+  "data": {
+    "deployId": "0Af1n00001iPE3XCAW"
+  },
+  "message": "Failed to validate the deployment (0Af1n00001iPE3XCAW). Due To:\nAverage test coverage across all Apex Classes and Triggers is 52%, at least 75% test coverage is required.",
+  "name": "FailedValidationError",
+  "status": 1,
+  "stack": "FailedValidationError: Failed to validate the deployment (0Af1n00001iPE3XCAW). Due To:\nAverage test coverage across all Apex Classes and Triggers is 52%, at least 75% test coverage is required.\n    at Messages.createError (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@salesforce/core/lib/messages.js:393:16)\n    at DeployMetadataValidate.run (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@salesforce/plugin-deploy-retrieve/lib/commands/project/deploy/validate.js:77:18)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async DeployMetadataValidate._run (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@oclif/core/lib/command.js:117:22)\n    at async Config.runCommand (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@oclif/core/lib/config/config.js:329:25)\n    at async run (/usr/local/lib/node_modules/@salesforce/cli/node_modules/@oclif/core/lib/main.js:89:16)",
+  "exitCode": 1,
+  "warnings": []
+}

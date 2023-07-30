@@ -1,10 +1,8 @@
 <template>
-  <lightning-card
-    title="Secret Dog Picture"
-    icon-name="utility:animal_and_nature"
-  >
+  <lightning-card icon-name="utility:animal_and_nature">
     <div class="slds-m-around_medium">
       <img src={dogPictureURL} />
     </div>
+    <lightning-button slot="footer" onclick={handleDogLike} variant="brand" label="Click to Like!"></lightning-button>
   </lightning-card>
 </template>

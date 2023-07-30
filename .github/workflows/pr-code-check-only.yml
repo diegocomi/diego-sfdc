@@ -14,13 +14,15 @@ jobs:
   job-validate-prod-deployment:
     name:  "Validate Deployment"
     runs-on: ubuntu-latest
+    outputs:
+      validation-result: ${{ steps.validate-deployment.outputs.result }}
     steps:
 
-      - name: "Install SFDX CLI"
-        run: npm install sfdx-cli -g
+      - name: "Install SF CLI"
+        run: npm install @salesforce/cli --global
       
-      - name: "Install SFDX Git Delta"
-        run: echo y | sfdx plugins:install sfdx-git-delta
+      - name: "Install SFDX Git Delta Plugin"
+        run: echo y | sf plugins install sfdx-git-delta
 
       - name: "Checkout source code"
         uses: actions/checkout@v3
@@ -31,10 +33,10 @@ jobs:
         run: echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
       
       - name: "Authorise into Salesforce"
-        run: sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --setdefaultdevhubusername
+        run: sf org login jwt --client-id ${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file server.key --username ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub
         
       - name: "Write Deployment Package"
-        run: sfdx sgd:source:delta --from "origin/${{ github.base_ref }}" --to "origin/${{ github.head_ref }}" --output . --source force-app/main/default
+        run: sf sgd source delta --from "origin/${{ github.base_ref }}" --to "origin/${{ github.head_ref }}" --output . --source force-app/main/default
 
       - name: "Upload package.xml to artifacts"
         uses: actions/upload-artifact@v3
@@ -42,11 +44,20 @@ jobs:
           name: "Deployment Package"
           path: package/package.xml
       
-      - name: "CheckOnly Test Run"
+      - name: "Validate Deployment to DiegOrg"
+        id: validate-deployment
         shell: bash
         run: |
+          cat ./package/package.xml
           if grep -q '<types>' package/package.xml;
           then
-            cat ./package/package.xml
-            sfdx force:source:deploy -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -x package/package.xml --testlevel RunLocalTests --verbose --wait 180 --checkonly
+            sf project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> validateResult.json
           fi
+      - name: "Retrieve failed step details"
+        shell: bash
+        id: validate-fail-retrieval
+        if: failure() && steps.validate-deployment.conclusion == 'failure'
+        run: |
+          DEPLOY_ID=$( jq -r '.data.deployId' validateResult.json )
+          sf project deploy report --job-id "$DEPLOY_ID" --coverage-formatters text
+          
