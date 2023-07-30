@@ -21,7 +21,7 @@ jobs:
       - name: "Install SF CLI"
         run: npm install @salesforce/cli --global
       
-      - name: "Install SFDX Git Delta"
+      - name: "Install SFDX Git Delta Plugin"
         run: echo y | sf plugins install sfdx-git-delta
 
       - name: "Checkout source code"
@@ -52,10 +52,10 @@ jobs:
 #          cat ./package/package.xml
 #          if grep -q '<types>' package/package.xml;
 #          then
-#            sfdx project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> "$GITHUB.OUTPUT"
+#            sf project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> "$GITHUB.OUTPUT"
  #         fi
       - name: "Retrieve failed step details"
         shell: bash
         id: validate-fail-retrieval
-        if: ${{ steps.validate-deployment.conclusion == 'failure '}}
+        if: ${{ always() && steps.validate-deployment.conclusion == 'failure '}}
         run:  echo "failure step completed"  #echo "${{ steps.validate-deployment.outputs }}"
