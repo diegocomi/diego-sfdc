@@ -57,5 +57,5 @@ jobs:
       - name: "Retrieve failed step details"
         shell: bash
         id: validate-fail-retrieval
-        if: ${{ failure() && steps.validate-deployment.conclusion == 'failure '}}
+        if: ${{ steps.validate-deployment.conclusion == 'failure '}}
         run:  echo "failure step completed"  #echo "${{ steps.validate-deployment.outputs }}"
