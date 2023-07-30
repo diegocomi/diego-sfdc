@@ -15,7 +15,7 @@ jobs:
     name:  "Validate Deployment"
     runs-on: ubuntu-latest
     outputs:
-      validation-result: ${{ steps.validate-deployment.outputs }}
+      validation-result: ${{ steps.validate-deployment.outputs.result }}
     steps:
 
       - name: "Install SF CLI"
