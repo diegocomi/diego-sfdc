@@ -52,7 +52,7 @@ jobs:
           if grep -q '<types>' package/package.xml;
           then
             sf project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> "$GITHUB.OUTPUT"
-#         fi
+          fi
       - name: "Retrieve failed step details"
         shell: bash
         id: validate-fail-retrieval
