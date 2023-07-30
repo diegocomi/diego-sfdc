@@ -59,6 +59,5 @@ jobs:
         if: failure() && steps.validate-deployment.conclusion == 'failure'
         run: |
           DEPLOY_ID=$( jq -r '.data.deployId' validateResult.json )
-          echo $DEPLOY_ID
           sf project deploy report --job-id "$DEPLOY_ID" --coverage-formatters text
           
