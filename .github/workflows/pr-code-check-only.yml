@@ -53,6 +53,7 @@ jobs:
           then
             sf project deploy validate --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --manifest package/package.xml --test-level RunLocalTests --verbose --wait 180 --json >> validateResult.json
           fi
+
       - name: "Retrieve failed step details"
         shell: bash
         id: validate-fail-retrieval
@@ -60,4 +61,19 @@ jobs:
         run: |
           DEPLOY_ID=$( jq -r '.data.deployId' validateResult.json )
           sf project deploy report --job-id "$DEPLOY_ID" --coverage-formatters text
+          
+      - name: "Stored successful deployment Id"
+        shell: bash
+        id: store-quick-deploy-id
+        if: success() && steps.validate-deployment.conclusion == 'success'
+        run: |
+          QUICK_DEPLOY_ID=$( jq -r '.result.id' validateResult.json )
+          VALIDATE_DATE=$( jq -r '.result.completedDate' validateResult.json )
+          PR_NUMBER=${{ github.event.number }}
+          QUICK_DEPLOY_JSON=$(jq --null-input \
+          --arg quickDeployId "$QUICK_DEPLOY_ID" \
+          --arg validationDate "$VALIDATE_DATE" \
+          --arg prNumber "$PR_NUMBER" \
+          '{"quickDeployId": $quickDeployId, "validationDate": $validationDate, "prNumber": $prNumber}')
+          echo $QUICK_DEPLOY_JSON
           
