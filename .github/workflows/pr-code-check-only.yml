@@ -73,7 +73,7 @@ jobs:
           QUICK_DEPLOY_JSON=$(jq --null-input \
           --arg quickDeployId "$QUICK_DEPLOY_ID" \
           --arg validationDate "$VALIDATE_DATE" \
-          --arg prNumber "$PR_NUMBER"
+          --arg prNumber "$PR_NUMBER" \
           '{"quickDeployId": $quickDeployId, "validationDate": $validationDate, "prNumber": $prNumber}')
           echo $QUICK_DEPLOY_JSON
           
